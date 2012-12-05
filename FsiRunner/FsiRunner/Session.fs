@@ -10,6 +10,7 @@ type public FsiSession(fsiPath: string) =
     do
         info.RedirectStandardInput <- true
         info.RedirectStandardOutput <- true
+        info.RedirectStandardError <- true
         info.UseShellExecute <- false
         info.CreateNoWindow <- true
         info.FileName <- fsiPath
@@ -25,6 +26,7 @@ type public FsiSession(fsiPath: string) =
     member this.Start() =
         fsiProcess.Start()
         fsiProcess.BeginOutputReadLine()
+        fsiProcess.BeginErrorReadLine()
 
     member this.AddLine(line: string) =
         fsiProcess.StandardInput.WriteLine(line)
