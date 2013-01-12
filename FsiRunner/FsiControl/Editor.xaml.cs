@@ -12,11 +12,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace WpfDemo
+namespace ClearLines.FsiControl
 {
-    /// <summary>
-    /// Interaction logic for Editor.xaml
-    /// </summary>
     public partial class Editor : UserControl
     {
         public Editor()

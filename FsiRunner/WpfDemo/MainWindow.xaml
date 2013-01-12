@@ -1,7 +1,9 @@
 ﻿<Window x:Class="WpfDemo.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:WpfDemo="clr-namespace:WpfDemo" Title="MainWindow" Height="350" Width="525">
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:FsiControl="clr-namespace:ClearLines.FsiControl;assembly=FsiControl" 
+        Title="MainWindow" Height="350" Width="525">
     <Grid>
-        <WpfDemo:Editor></WpfDemo:Editor>
+        <FsiControl:Editor/>
     </Grid>
 </Window>

@@ -1,4 +1,4 @@
-﻿namespace WpfDemo
+﻿namespace ClearLines.FsiControl
 {
     using System;
     using System.Collections.Generic;
