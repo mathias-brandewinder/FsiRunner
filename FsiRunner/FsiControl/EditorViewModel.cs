@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Diagnostics;
     using System.Windows.Input;
     using ClearLines.FsiRunner;
@@ -11,15 +12,16 @@
     public class EditorViewModel : ViewModelBase
     {
         private FsiSession session;
-        private string code;
         private RelayCommand run;
+        private RelayCommand addCodeBlock;
         private string feedback;
+        private ObservableCollection<CodeBlock> codeBlocks;
 
         public EditorViewModel()
         {
-            this.code = "Hello World";
-            this.run = new RelayCommand(OnRun, CanRun);
             this.feedback = "";
+            this.run = new RelayCommand(OnRun, CanRun);
+            this.addCodeBlock = new RelayCommand(OnAddCodeBlock);
 
             var fsiPath = @"C:\Program Files (x86)\Microsoft F#\v4.0\fsi.exe";
             this.session = new FsiSession(fsiPath);
@@ -28,19 +30,13 @@
             this.Session.OutputReceived += OnOutputReceived;
             this.Session.ErrorReceived += OnErrorReceived;
 
+            this.codeBlocks = new ObservableCollection<CodeBlock>();
+            this.CodeBlocks.Add(new CodeBlock(this.Session));
         }
 
-        public string CodeBlock
+        public ObservableCollection<CodeBlock> CodeBlocks
         {
-            get { return this.code; }
-            set
-            {
-                if (this.code != value)
-                {
-                    this.code = value;
-                    base.RaisePropertyChanged("CodeBlock");
-                }
-            }
+            get { return this.codeBlocks; }
         }
 
         public string Feedback
@@ -66,25 +62,28 @@
             get { return this.run; }
         }
 
+        public ICommand AddCodeBlock
+        {
+            get { return this.addCodeBlock; }
+        }
+
         private void OnRun()
         {
-            var lines = this.BreakLines(this.CodeBlock);
-            foreach (var line in lines)
-            {
-                this.Session.AddLine(line);
-            }
-
-            this.Session.Evaluate();
+            // TODO: implement as run-all
         }
 
         private bool CanRun()
         {
-            return true;
+            return false;
+        }
+
+        private void OnAddCodeBlock()
+        {
+            this.CodeBlocks.Add(new CodeBlock(this.Session));
         }
 
         private void OnOutputReceived(object sender, DataReceivedEventArgs e)
         {
-
             this.Feedback = this.Feedback + Environment.NewLine + e.Data;
         }
 

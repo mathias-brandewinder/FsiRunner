@@ -10,17 +10,39 @@
         <FsiControl:EditorViewModel x:Key="ViewModel"/>
     </UserControl.Resources>
     <!--<UserControl DataContext="{Binding Source={StaticResource ViewModel}}"/>-->
-    
-    <StackPanel DataContext="{StaticResource ViewModel}">
-        <TextBox Text="{Binding CodeBlock}" 
-                 TextWrapping="Wrap" 
-                 AcceptsReturn="True" 
-                 Height="100" Background="LightGray" 
-                 FontFamily="Consolas" FontSize="16"/>
-        <Button Command="{Binding Run}" 
-                Width="100" Height="30" 
-                Content="Run"/>
-        <TextBox Text="{Binding Feedback}" 
-                 FontFamily="Consolas" FontSize="16"/>
-    </StackPanel>
+
+    <DockPanel DataContext="{StaticResource ViewModel}">
+        <DockPanel DockPanel.Dock="Top">
+            <Button
+                Command="{Binding AddCodeBlock}"
+                DockPanel.Dock="Bottom"
+                Content="New Block"
+                HorizontalAlignment="Right"
+                Width="70" Height="28"/>
+            <ListView ItemsSource="{Binding CodeBlocks}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <DockPanel >
+                            <Button 
+                                DockPanel.Dock="Right" 
+                                Command="{Binding Run}"
+                                Content="Run" FontSize="9"
+                                Width="30" Height="20"/>
+                            <TextBox 
+                                Width="200"
+                                Text="{Binding Code}"                  
+                                TextWrapping="Wrap" 
+                                AcceptsReturn="True" 
+                                Background="LightGray" 
+                                FontFamily="Consolas" FontSize="16"/>
+                        </DockPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </DockPanel>
+        
+        <TextBox 
+            Text="{Binding Feedback}" 
+            FontFamily="Consolas" FontSize="16"/>
+    </DockPanel>
 </UserControl>
