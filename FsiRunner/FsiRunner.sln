@@ -5,6 +5,8 @@ Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "FsiRunner", "FsiRunner\FsiR
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleDemo", "ConsoleDemo\ConsoleDemo.csproj", "{742D99A8-F935-4765-8F4F-9C9792DEF7F2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfDemo", "WpfDemo\WpfDemo.csproj", "{9A71569F-40A8-4D75-BB96-5545507FF621}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +37,16 @@ Global
 		{742D99A8-F935-4765-8F4F-9C9792DEF7F2}.Release|Mixed Platforms.Build.0 = Release|x86
 		{742D99A8-F935-4765-8F4F-9C9792DEF7F2}.Release|x86.ActiveCfg = Release|x86
 		{742D99A8-F935-4765-8F4F-9C9792DEF7F2}.Release|x86.Build.0 = Release|x86
+		{9A71569F-40A8-4D75-BB96-5545507FF621}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{9A71569F-40A8-4D75-BB96-5545507FF621}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{9A71569F-40A8-4D75-BB96-5545507FF621}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{9A71569F-40A8-4D75-BB96-5545507FF621}.Debug|x86.ActiveCfg = Debug|x86
+		{9A71569F-40A8-4D75-BB96-5545507FF621}.Debug|x86.Build.0 = Debug|x86
+		{9A71569F-40A8-4D75-BB96-5545507FF621}.Release|Any CPU.ActiveCfg = Release|x86
+		{9A71569F-40A8-4D75-BB96-5545507FF621}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{9A71569F-40A8-4D75-BB96-5545507FF621}.Release|Mixed Platforms.Build.0 = Release|x86
+		{9A71569F-40A8-4D75-BB96-5545507FF621}.Release|x86.ActiveCfg = Release|x86
+		{9A71569F-40A8-4D75-BB96-5545507FF621}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
