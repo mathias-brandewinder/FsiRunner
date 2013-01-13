@@ -6,47 +6,67 @@
              xmlns:FsiControl="clr-namespace:ClearLines.FsiControl" 
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
+
     <UserControl.Resources>
         <FsiControl:EditorViewModel x:Key="ViewModel"/>
     </UserControl.Resources>
-    <!--<UserControl DataContext="{Binding Source={StaticResource ViewModel}}"/>-->
 
     <DockPanel DataContext="{StaticResource ViewModel}">
-        <DockPanel DockPanel.Dock="Top">
-            <Button
-                Command="{Binding AddCodeBlock}"
-                DockPanel.Dock="Bottom"
-                Content="New Block"
-                HorizontalAlignment="Right"
-                Width="70" Height="28"/>
-            <ListView ItemsSource="{Binding CodeBlocks}">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="50"/>
-                            </Grid.ColumnDefinitions>
-                            <TextBox 
-                                Grid.Column="0"
-                                Text="{Binding Code}"                  
-                                TextWrapping="Wrap" 
-                                AcceptsReturn="True"
-                                Background="LightGray" 
-                                FontFamily="Consolas" FontSize="16"/>
-                            <Button 
-                                Grid.Column="1" 
-                                Command="{Binding Run}"
-                                Content="Run" FontSize="9"
-                                Width="30" Height="20"/>
-                        </Grid>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </DockPanel>
-        
-        <TextBox 
-            Text="{Binding Feedback}" 
-            FontFamily="Consolas" FontSize="16"/>
+        <Border DockPanel.Dock="Top">
+            <StackPanel>
+                <ListView ItemsSource="{Binding CodeBlocks}">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Border Margin="2" Padding="2">
+                                <StackPanel>
+                                    <TextBox  
+                                        Text="{Binding Code}"                  
+                                        TextWrapping="Wrap" 
+                                        AcceptsReturn="True"
+                                        Background="LightGray" 
+                                        FontFamily="Consolas" 
+                                        FontSize="13"/>
+                                    <Border>
+                                        <Button
+                                            Command="{Binding Run}"
+                                            HorizontalAlignment="Right"
+                                            Content="Run" 
+                                            FontSize="9"
+                                            Width="30" 
+                                            Height="20"/>
+                                    </Border>
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+                <Border>
+                    <Button
+                        Command="{Binding AddCodeBlock}"
+                        Content="New Block"
+                        HorizontalAlignment="Right"
+                        FontSize="9"
+                        Width="60" 
+                        Height="20"/>
+                </Border>
+            </StackPanel>
+        </Border>
+
+        <Border Margin="5">
+            <TextBox 
+                Text="{Binding Feedback}" 
+                IsReadOnly="True"
+                VerticalScrollBarVisibility="Auto"
+                Background="LightGray" 
+                FontFamily="Consolas" 
+                FontSize="13"/>
+        </Border>
+
     </DockPanel>
 </UserControl>
