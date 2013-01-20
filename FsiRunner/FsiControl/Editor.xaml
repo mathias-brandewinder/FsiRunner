@@ -3,45 +3,35 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:FsiControl="clr-namespace:ClearLines.FsiControl" 
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
 
-    <UserControl.Resources>
-        <FsiControl:EditorViewModel x:Key="ViewModel"/>
-    </UserControl.Resources>
-
-    <DockPanel DataContext="{StaticResource ViewModel}">
+    <DockPanel>
         <Border DockPanel.Dock="Top">
             <StackPanel>
-                <ListView ItemsSource="{Binding CodeBlocks}">
-                    <ListView.ItemContainerStyle>
-                        <Style TargetType="ListViewItem">
-                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                        </Style>
-                    </ListView.ItemContainerStyle>
+                <ListView ItemsSource="{Binding CodeBlocks}" 
+                          ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                          HorizontalContentAlignment="Stretch">
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <Border Margin="2" Padding="2">
-                                <StackPanel>
-                                    <TextBox  
-                                        Text="{Binding Code}"                  
-                                        TextWrapping="Wrap" 
-                                        AcceptsReturn="True"
-                                        Background="LightGray" 
-                                        FontFamily="Consolas" 
-                                        FontSize="13"/>
-                                    <Border>
-                                        <Button
-                                            Command="{Binding Run}"
-                                            HorizontalAlignment="Right"
-                                            Content="Run" 
-                                            FontSize="9"
-                                            Width="30" 
-                                            Height="20"/>
-                                    </Border>
-                                </StackPanel>
-                            </Border>
+                            <StackPanel>
+                                <TextBox  
+                                    Text="{Binding Code}"                  
+                                    AcceptsReturn="True"
+                                    TextWrapping="Wrap"
+                                    Background="LightGray" 
+                                    FontFamily="Consolas" 
+                                    FontSize="13" HorizontalScrollBarVisibility="Disabled"/>
+                                <Border>
+                                    <Button
+                                        Command="{Binding Run}"
+                                        HorizontalAlignment="Right"
+                                        Content="Run" 
+                                        FontSize="9"
+                                        Width="30" 
+                                        Height="20"/>
+                                </Border>
+                            </StackPanel>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
@@ -49,24 +39,26 @@
                 <Border>
                     <Button
                         Command="{Binding AddCodeBlock}"
-                        Content="New Block"
+                        Content="+"
                         HorizontalAlignment="Right"
-                        FontSize="9"
-                        Width="60" 
-                        Height="20"/>
+                        FontSize="12"/>
                 </Border>
             </StackPanel>
         </Border>
-
-        <Border Margin="5">
-            <TextBox 
-                Text="{Binding Feedback}" 
-                IsReadOnly="True"
-                VerticalScrollBarVisibility="Auto"
-                Background="LightGray" 
-                FontFamily="Consolas" 
-                FontSize="13"/>
-        </Border>
-
+        <ListView ItemsSource="{Binding FeedbackBlocks}" 
+            ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+            HorizontalContentAlignment="Stretch"
+            Margin="0,5,0,0">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock  
+                        Text="{Binding Result}"
+                        TextWrapping="Wrap"
+                        FontFamily="Consolas"
+                        Background="LightGray"
+                        FontSize="13"/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </DockPanel>
 </UserControl>

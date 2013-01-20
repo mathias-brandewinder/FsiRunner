@@ -13,6 +13,8 @@ using System.Windows.Shapes;
 
 namespace WpfDemo
 {
+    using ClearLines.FsiControl;
+
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
@@ -21,6 +23,9 @@ namespace WpfDemo
         public MainWindow()
         {
             InitializeComponent();
+            var configuration = new Configuration();
+            var viewModel = new EditorViewModel(configuration);
+            this.Editor.DataContext = viewModel;
         }
     }
 }

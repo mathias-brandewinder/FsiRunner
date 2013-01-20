@@ -4,6 +4,6 @@
         xmlns:FsiControl="clr-namespace:ClearLines.FsiControl;assembly=FsiControl" 
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        <FsiControl:Editor/>
+        <FsiControl:Editor Name="Editor"/>
     </Grid>
 </Window>

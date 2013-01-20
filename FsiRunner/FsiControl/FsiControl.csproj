@@ -74,6 +74,8 @@
     <Compile Include="EditorViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FeedbackBlock.cs" />
+    <Compile Include="IConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
