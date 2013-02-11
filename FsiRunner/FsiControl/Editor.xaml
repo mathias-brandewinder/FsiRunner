@@ -10,18 +10,28 @@
     <DockPanel>
         <Grid>
             <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
                 <RowDefinition/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
             
             <GridSplitter 
-                Grid.Row ="1" 
+                Grid.Row ="2" 
                 Background="Gray" Height="5"
                 ResizeDirection="Rows"
                 HorizontalAlignment="Stretch" 
                 VerticalAlignment="Top"/>
 
-            <ScrollViewer Grid.Row="0" HorizontalScrollBarVisibility="Hidden">
+            <StackPanel 
+                Grid.Row="0"
+                Orientation="Horizontal" 
+                Background="Gray">
+                <TextBlock Text="Font"/>
+                <Button Command="{Binding IncreaseFontSize}"  Content="+"/>
+                <Button Command="{Binding DecreaseFontSize}"  Content="-"/>
+            </StackPanel>
+            
+            <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Hidden">
                 <StackPanel>
                     <ListView ItemsSource="{Binding CodeBlocks}" 
                           ScrollViewer.HorizontalScrollBarVisibility="Disabled"
@@ -33,7 +43,7 @@
                                     Document="{Binding Document}"
                                     Name="textEditor"
                                     FontFamily="Consolas"
-                                    FontSize="12pt"
+                                    FontSize="{Binding FontSize}"
                                     SyntaxHighlighting="C#">
                                     </avalonEdit:TextEditor>
                                     <Border>
@@ -61,7 +71,7 @@
             </ScrollViewer>
 
             <ListView 
-                Grid.Row="1" 
+                Grid.Row="2" 
                 ItemsSource="{Binding FeedbackBlocks}" 
                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                 HorizontalContentAlignment="Stretch"

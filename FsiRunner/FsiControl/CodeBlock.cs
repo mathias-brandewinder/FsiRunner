@@ -22,6 +22,8 @@ namespace ClearLines.FsiControl
 
         public TextDocument Document { get; set; }
 
+        public double FontSize { get; set; }
+
         public string Code
         {
             get { return this.Document.Text; }

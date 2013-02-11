@@ -14,21 +14,30 @@
     public class EditorViewModel : ViewModelBase
     {
         private FsiSession session;
+
         private RelayCommand run;
         private RelayCommand addCodeBlock;
+        private RelayCommand increaseFontSize;
+        private RelayCommand decreaseFontSize;
+
         private string feedback;
         private ObservableCollection<CodeBlock> codeBlocks;
         private ObservableCollection<FeedbackBlock> feedbackBlocks;
         private readonly IConfiguration configuration;
+        private double fontSize;
 
         public EditorViewModel(IConfiguration configuration)
         {
+            this.fontSize = 13.0;
             this.configuration = configuration;
             DispatcherHelper.Initialize();
 
             this.feedback = "";
             this.run = new RelayCommand(OnRun, CanRun);
             this.addCodeBlock = new RelayCommand(OnAddCodeBlock);
+
+            this.increaseFontSize = new RelayCommand(OnIncreaseFont);
+            this.decreaseFontSize = new RelayCommand(OnDecreaseFont);
 
             var fsiPath = this.configuration.FsiLocation; //@"C:\Program Files (x86)\Microsoft F#\v4.0\fsi.exe";
             this.session = new FsiSession(fsiPath);
@@ -53,6 +62,23 @@
             get { return this.feedbackBlocks; }
         }
 
+        public double FontSize
+        {
+            get { return this.fontSize; }
+            set
+            {
+                if (value < 5.0)
+                {
+                    return;                    
+                }
+
+                if (value != this.fontSize)
+                {
+                    this.fontSize = value; 
+                    base.RaisePropertyChanged("FontSize");
+                }
+            }
+        }
         public string Feedback
         {
             get { return this.feedback; }
@@ -81,6 +107,16 @@
             get { return this.addCodeBlock; }
         }
 
+        public ICommand IncreaseFontSize
+        {
+            get { return this.increaseFontSize; }
+        }
+
+        public ICommand DecreaseFontSize
+        {
+            get { return this.decreaseFontSize; }
+        }
+
         private void OnRun()
         {
             // TODO: implement as run-all
@@ -94,6 +130,16 @@
         private void OnAddCodeBlock()
         {
             this.CodeBlocks.Add(new CodeBlock(this.Session));
+        }
+
+        private void OnIncreaseFont()
+        {
+            this.FontSize += 0.5;
+        }
+
+        private void OnDecreaseFont()
+        {
+            this.FontSize -= 0.5;
         }
 
         private void OnOutputReceived(object sender, DataReceivedEventArgs e)
