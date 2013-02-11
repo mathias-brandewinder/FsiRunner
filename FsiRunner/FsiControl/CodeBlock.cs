@@ -1,3 +1,5 @@
+using ICSharpCode.AvalonEdit.Document;
+
 namespace ClearLines.FsiControl
 {
     using System.Collections.Generic;
@@ -9,27 +11,20 @@ namespace ClearLines.FsiControl
     public class CodeBlock : ViewModelBase
     {
         private readonly FsiSession session;
-        private string code;
         private RelayCommand run;
 
         public CodeBlock(FsiSession session)
         {
-            this.code = "";
+            this.Document = new TextDocument("");
             this.session = session;
             this.run = new RelayCommand(OnRun, CanRun);
         }
 
+        public TextDocument Document { get; set; }
+
         public string Code
         {
-            get { return this.code; }
-            set
-            {
-                if (this.code != value)
-                {
-                    this.code = value;
-                    base.RaisePropertyChanged("CodeBlock");
-                }
-            }
+            get { return this.Document.Text; }
         }
 
         public ICommand Run
