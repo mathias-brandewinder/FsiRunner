@@ -12,7 +12,6 @@
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition/>
-                <RowDefinition/>
             </Grid.RowDefinitions>
             
             <GridSplitter 
@@ -20,7 +19,7 @@
                 Background="Gray" Height="5"
                 ResizeDirection="Rows"
                 HorizontalAlignment="Stretch" 
-                VerticalAlignment="Bottom"/>
+                VerticalAlignment="Top"/>
 
             <ScrollViewer Grid.Row="0" HorizontalScrollBarVisibility="Hidden">
                 <StackPanel>
@@ -61,10 +60,12 @@
                 </StackPanel>
             </ScrollViewer>
 
-            <ListView Grid.Row="2" ItemsSource="{Binding FeedbackBlocks}" 
-            ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-            HorizontalContentAlignment="Stretch"
-            Margin="0,5,0,0">
+            <ListView 
+                Grid.Row="1" 
+                ItemsSource="{Binding FeedbackBlocks}" 
+                ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                HorizontalContentAlignment="Stretch"
+                Margin="0,5,0,0">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <TextBlock  
