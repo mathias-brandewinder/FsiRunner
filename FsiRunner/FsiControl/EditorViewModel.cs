@@ -69,12 +69,12 @@
             {
                 if (value < 5.0)
                 {
-                    return;                    
+                    return;
                 }
 
                 if (value != this.fontSize)
                 {
-                    this.fontSize = value; 
+                    this.fontSize = value;
                     base.RaisePropertyChanged("FontSize");
                 }
             }
@@ -129,17 +129,37 @@
 
         private void OnAddCodeBlock()
         {
-            this.CodeBlocks.Add(new CodeBlock(this.Session));
+            this.CodeBlocks.Add(new CodeBlock(this.Session) { FontSize = this.FontSize });
         }
 
         private void OnIncreaseFont()
         {
             this.FontSize += 0.5;
+
+            foreach (var codeblock in this.CodeBlocks)
+            {
+                codeblock.FontSize = this.FontSize;
+            }
+
+            foreach (var feedback in this.FeedbackBlocks)
+            {
+                feedback.FontSize = this.FontSize;
+            }
         }
 
         private void OnDecreaseFont()
         {
             this.FontSize -= 0.5;
+
+            foreach (var codeblock in this.CodeBlocks)
+            {
+                codeblock.FontSize = this.FontSize;
+            }
+
+            foreach (var feedback in this.FeedbackBlocks)
+            {
+                feedback.FontSize = this.FontSize;
+            }
         }
 
         private void OnOutputReceived(object sender, DataReceivedEventArgs e)
@@ -169,6 +189,7 @@
                 DispatcherHelper.CheckBeginInvokeOnUI(() =>
                 {
                     var feedback = new FeedbackBlock(e.Data);
+                    feedback.FontSize = this.FontSize;
                     this.FeedbackBlocks.Add(feedback);
                 });
             }

@@ -79,11 +79,11 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <TextBlock  
-                        Text="{Binding Result}"
-                        TextWrapping="Wrap"
-                        FontFamily="Consolas"
-                        Background="LightGray"
-                        FontSize="13"/>
+                            Text="{Binding Result}"
+                            TextWrapping="Wrap"
+                            FontFamily="Consolas"
+                            Background="LightGray"
+                            FontSize="{Binding FontSize}"/>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>

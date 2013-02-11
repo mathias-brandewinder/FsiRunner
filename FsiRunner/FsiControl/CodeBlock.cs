@@ -12,6 +12,7 @@ namespace ClearLines.FsiControl
     {
         private readonly FsiSession session;
         private RelayCommand run;
+        private double fontSize;
 
         public CodeBlock(FsiSession session)
         {
@@ -22,7 +23,15 @@ namespace ClearLines.FsiControl
 
         public TextDocument Document { get; set; }
 
-        public double FontSize { get; set; }
+        public double FontSize
+        {
+            get { return this.fontSize; }
+            set
+            {
+                this.fontSize = value;
+                base.RaisePropertyChanged("FontSize");
+            }
+        }
 
         public string Code
         {
