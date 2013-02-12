@@ -12,19 +12,13 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="30"/>
                 <RowDefinition/>
+                <RowDefinition Height="30"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
-            <GridSplitter 
-                Grid.Row ="2" 
-                Background="Gray" Height="5"
-                ResizeDirection="Rows"
-                HorizontalAlignment="Stretch" 
-                VerticalAlignment="Top"/>
-
-            <Border Background="Gray">
-                <StackPanel 
-                    Grid.Row="0"
+            <!--Menu Row-->
+            <Border Background="Gray" Grid.Row="0">
+                <StackPanel                     
                     HorizontalAlignment="Right"
                     Orientation="Horizontal" 
                     Background="Gray">
@@ -51,20 +45,23 @@
                 </StackPanel>
             </Border>
 
+            <!--Code entry area-->
             <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Hidden">
                 <StackPanel>
+                    <!--List of "Code Blocks"-->
                     <ListView ItemsSource="{Binding CodeBlocks}" 
                           ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                           HorizontalContentAlignment="Stretch">
                         <ListView.ItemTemplate>
                             <DataTemplate>
-                                <Border 
+                                <Expander IsExpanded="True">
+                                    <Border 
                                     BorderBrush="Gray" 
                                     BorderThickness="0,1,0,3"
                                     Padding="2"
                                     Margin="2">
-                                    <StackPanel>
-                                        <avalonEdit:TextEditor 
+                                        <StackPanel>
+                                            <avalonEdit:TextEditor 
                                             Document="{Binding Document}"
                                             Name="textEditor"
                                             FontFamily="Consolas"
@@ -72,9 +69,9 @@
                                             SyntaxHighlighting="C#"
                                             HorizontalScrollBarVisibility="Auto"
                                             VerticalScrollBarVisibility="Auto">
-                                        </avalonEdit:TextEditor>
-                                        <Border Background="LightGray">
-                                            <Button
+                                            </avalonEdit:TextEditor>
+                                            <Border Background="LightGray">
+                                                <Button
                                                 Command="{Binding Run}"
                                                 HorizontalAlignment="Right"
                                                 Content="Run" 
@@ -83,34 +80,46 @@
                                                 Foreground="White"
                                                 Height="25"
                                                 Padding="2"/>
-                                        </Border>
-                                    </StackPanel>
-                                </Border>
+                                            </Border>
+                                        </StackPanel>
+                                    </Border>
+                                </Expander>
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
+                    <!--End of List of "Code Blocks"-->
+                </StackPanel>
+            </ScrollViewer>
+            <!--End of Code entry area-->
 
-                    <StackPanel 
-                    Grid.Row="0"
+            <!--Menu of codeblocks actions-->
+            <Border Grid.Row="2" Background="Gray">
+                <StackPanel                
                     HorizontalAlignment="Right"
-                    Orientation="Horizontal" 
-                    Background="Gray">
-                        <Button
+                    Orientation="Horizontal">
+                    <Button
                         Command="{Binding AddCodeBlock}"
+                        Content="+"
                         FontSize="12"
                         Background="Black"
                         Foreground="White"
                         Height="25"
-                        Width="25">
-                            +
-                        </Button>
-                    </StackPanel>
-
+                        Width="25"/>
                 </StackPanel>
-            </ScrollViewer>
+            </Border>
+            <!--End of Menu of codeblocks actions-->
 
+            <!--Splitter to expand / reduce the size of code blocks vs. feedback-->
+            <GridSplitter 
+                Grid.Row ="3" 
+                Background="Gray" Height="5"
+                ResizeDirection="Rows"
+                HorizontalAlignment="Stretch" 
+                VerticalAlignment="Top"/>
+
+            <!--List of "Feedback" responses from FSI-->
             <ListView 
-                Grid.Row="2" 
+                Grid.Row="3" 
                 ItemsSource="{Binding FeedbackBlocks}" 
                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                 HorizontalContentAlignment="Stretch"
@@ -126,6 +135,8 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+            <!--End of the List of "Feedback" responses from FSI-->
+
         </Grid>
     </DockPanel>
 </UserControl>
