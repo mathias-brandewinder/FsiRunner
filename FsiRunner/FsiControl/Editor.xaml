@@ -5,7 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="300" d:DesignWidth="300" FontFamily="Segoe UI">
 
     <DockPanel>
         <Grid>
@@ -14,7 +14,7 @@
                 <RowDefinition/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            
+
             <GridSplitter 
                 Grid.Row ="2" 
                 Background="Gray" Height="5"
@@ -22,15 +22,35 @@
                 HorizontalAlignment="Stretch" 
                 VerticalAlignment="Top"/>
 
-            <StackPanel 
-                Grid.Row="0"
-                Orientation="Horizontal" 
-                Background="Gray">
-                <TextBlock Text="Font"/>
-                <Button Command="{Binding IncreaseFontSize}"  Content="+"/>
-                <Button Command="{Binding DecreaseFontSize}"  Content="-"/>
-            </StackPanel>
-            
+            <Border Background="Gray">
+                <StackPanel 
+                    Grid.Row="0"
+                    HorizontalAlignment="Right"
+                    Orientation="Horizontal" 
+                    Background="Gray">
+                    <TextBlock 
+                        Text="Font Size" 
+                        FontSize="13"
+                        Margin="3"
+                        Foreground="White"
+                        VerticalAlignment="Center"/>
+                    <Button 
+                        Command="{Binding IncreaseFontSize}" 
+                        Content="+"
+                        Width="25" 
+                        Height="25" 
+                        Background="Black" 
+                        Foreground="White"/>
+                    <Button 
+                        Command="{Binding DecreaseFontSize}"
+                        Content="-"
+                        Width="25" 
+                        Height="25" 
+                        Background="Black" 
+                        Foreground="White"/>
+                </StackPanel>
+            </Border>
+
             <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Hidden">
                 <StackPanel>
                     <ListView ItemsSource="{Binding CodeBlocks}" 
@@ -38,35 +58,54 @@
                           HorizontalContentAlignment="Stretch">
                         <ListView.ItemTemplate>
                             <DataTemplate>
-                                <StackPanel>
-                                    <avalonEdit:TextEditor 
-                                    Document="{Binding Document}"
-                                    Name="textEditor"
-                                    FontFamily="Consolas"
-                                    FontSize="{Binding FontSize}"
-                                    SyntaxHighlighting="C#">
-                                    </avalonEdit:TextEditor>
-                                    <Border>
-                                        <Button
-                                        Command="{Binding Run}"
-                                        HorizontalAlignment="Right"
-                                        Content="Run" 
-                                        FontSize="9"
-                                        Width="30" 
-                                        Height="20"/>
-                                    </Border>
-                                </StackPanel>
+                                <Border 
+                                    BorderBrush="Gray" 
+                                    BorderThickness="0,1,0,3"
+                                    Padding="2"
+                                    Margin="2">
+                                    <StackPanel>
+                                        <avalonEdit:TextEditor 
+                                            Document="{Binding Document}"
+                                            Name="textEditor"
+                                            FontFamily="Consolas"
+                                            FontSize="{Binding FontSize}"
+                                            SyntaxHighlighting="C#"
+                                            HorizontalScrollBarVisibility="Auto"
+                                            VerticalScrollBarVisibility="Auto">
+                                        </avalonEdit:TextEditor>
+                                        <Border Background="LightGray">
+                                            <Button
+                                                Command="{Binding Run}"
+                                                HorizontalAlignment="Right"
+                                                Content="Run" 
+                                                FontSize="9"
+                                                Background="Red"
+                                                Foreground="White"
+                                                Height="25"
+                                                Padding="2"/>
+                                        </Border>
+                                    </StackPanel>
+                                </Border>
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
 
-                    <Border>
+                    <StackPanel 
+                    Grid.Row="0"
+                    HorizontalAlignment="Right"
+                    Orientation="Horizontal" 
+                    Background="Gray">
                         <Button
                         Command="{Binding AddCodeBlock}"
-                        Content="+"
-                        HorizontalAlignment="Right"
-                        FontSize="12"/>
-                    </Border>
+                        FontSize="12"
+                        Background="Black"
+                        Foreground="White"
+                        Height="25"
+                        Width="25">
+                            +
+                        </Button>
+                    </StackPanel>
+
                 </StackPanel>
             </ScrollViewer>
 
