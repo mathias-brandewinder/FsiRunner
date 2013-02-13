@@ -1,4 +1,5 @@
 using ICSharpCode.AvalonEdit.Document;
+using ICSharpCode.AvalonEdit.Highlighting;
 
 namespace ClearLines.FsiControl
 {
@@ -13,15 +14,27 @@ namespace ClearLines.FsiControl
         private readonly FsiSession session;
         private RelayCommand run;
         private double fontSize;
+        private IHighlightingDefinition syntaxHighlighting;
 
-        public CodeBlock(FsiSession session)
+        public CodeBlock(FsiSession session, IHighlightingDefinition syntaxHighlighting)
         {
             this.Document = new TextDocument("");
             this.session = session;
+            this.syntaxHighlighting = syntaxHighlighting;
             this.run = new RelayCommand(OnRun, CanRun);
         }
 
         public TextDocument Document { get; set; }
+
+        public IHighlightingDefinition Highlighting
+        {
+            get { return this.syntaxHighlighting; }
+            set
+            {
+                this.syntaxHighlighting = value;
+                base.RaisePropertyChanged("Highlighting");
+            }
+        }
 
         public double FontSize
         {

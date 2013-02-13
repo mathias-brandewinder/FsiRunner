@@ -1,4 +1,12 @@
-﻿namespace ClearLines.FsiControl
+﻿using System.IO;
+using System.Reflection;
+using System.Xaml;
+using System.Xml;
+using ICSharpCode.AvalonEdit;
+using ICSharpCode.AvalonEdit.Highlighting;
+using ICSharpCode.AvalonEdit.Highlighting.Xshd;
+
+namespace ClearLines.FsiControl
 {
     using System;
     using System.Collections.Generic;
@@ -25,6 +33,7 @@
         private ObservableCollection<FeedbackBlock> feedbackBlocks;
         private readonly IConfiguration configuration;
         private double fontSize;
+        private IHighlightingDefinition syntaxHighlighting;
 
         public EditorViewModel(IConfiguration configuration)
         {
@@ -46,8 +55,21 @@
             this.Session.OutputReceived += OnOutputReceived;
             this.Session.ErrorReceived += OnErrorReceived;
 
+            var editorLocation = Assembly.GetExecutingAssembly().Location;
+            var editorPath = Path.GetDirectoryName(editorLocation);
+            var highlightFileName = "FSharpHighlighting.xshd";
+            var highlightFileLocation = Path.Combine(editorPath, highlightFileName);
+
+            using (var stream = File.OpenRead(highlightFileLocation))
+            {
+                using (var reader = new XmlTextReader(stream))
+                {
+                    this.syntaxHighlighting = HighlightingLoader.Load(reader, HighlightingManager.Instance);
+                }
+            }
+
             this.codeBlocks = new ObservableCollection<CodeBlock>();
-            this.CodeBlocks.Add(new CodeBlock(this.Session));
+            this.CodeBlocks.Add(new CodeBlock(this.Session, this.syntaxHighlighting));
 
             this.feedbackBlocks = new ObservableCollection<FeedbackBlock>();
         }
@@ -129,7 +151,8 @@
 
         private void OnAddCodeBlock()
         {
-            this.CodeBlocks.Add(new CodeBlock(this.Session) { FontSize = this.FontSize });
+            var codeBlock = new CodeBlock(this.Session, this.syntaxHighlighting) { FontSize = this.FontSize };
+            this.CodeBlocks.Add(codeBlock);
         }
 
         private void OnIncreaseFont()

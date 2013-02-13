@@ -62,13 +62,14 @@
                                     Margin="2">
                                         <StackPanel>
                                             <avalonEdit:TextEditor 
-                                            Document="{Binding Document}"
-                                            Name="textEditor"
-                                            FontFamily="Consolas"
-                                            FontSize="{Binding FontSize}"
-                                            SyntaxHighlighting="C#"
-                                            HorizontalScrollBarVisibility="Auto"
-                                            VerticalScrollBarVisibility="Auto">
+                                                Document="{Binding Document}"
+                                                Name="textEditor"
+                                                ShowLineNumbers="True"
+                                                FontFamily="Consolas"
+                                                FontSize="{Binding FontSize}"
+                                                SyntaxHighlighting="{Binding Highlighting}"
+                                                HorizontalScrollBarVisibility="Auto"
+                                                VerticalScrollBarVisibility="Auto">
                                             </avalonEdit:TextEditor>
                                             <Border Background="LightGray">
                                                 <Button
