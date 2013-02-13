@@ -1,41 +1,206 @@
-﻿<SyntaxDefinition name="F#"
-        xmlns="http://icsharpcode.net/sharpdevelop/syntaxdefinition/2008">
+﻿<?xml version="1.0"?>
+<SyntaxDefinition name="F#" xmlns="http://icsharpcode.net/sharpdevelop/syntaxdefinition/2008">
+
   <Color name="Comment" foreground="Green" />
-  <Color name="String" foreground="Blue" />
-
-  <!-- This is the main ruleset. -->
-  <RuleSet>
-    <Span color="Comment" begin="//" />
-    <Span color="Comment" multiline="true"
-       begin="/\*" end="\*/" />
-
-    <Span color="String">
-      <Begin>"</Begin>
-      <End>"</End>
+	<Color name="String" foreground="Red" />
+ 	<Color name="Keywords" fontWeight="bold" foreground="Blue" />
+  <Color name="Reserved" fontStyle="italic" foreground="DarkBlue" />
+  <Color name="OCamlKeywords" foreground="DarkBlue" />
+  <Color name="Preprocessor" fontWeight="bold" foreground="DarkGreen" />
+  <Color name="NumberLiteral" foreground="DarkViolet" />
+  <Color name="Punctuation" />
+  <Color name="Operators" />
+  
+ 	<RuleSet name="CommentMarkerSet">
+		<Keywords fontWeight="bold" foreground="Red">
+			<Word>TODO</Word>
+			<Word>FIXME</Word>
+		</Keywords>
+		<Keywords fontWeight="bold" foreground="Cyan">
+			<Word>HACK</Word>
+			<Word>UNDONE</Word>
+		</Keywords>
+	</RuleSet>     
+  
+	<!-- This is the main ruleset. -->
+	<RuleSet>
+    <Span color="Comment" begin="//">
       <RuleSet>
-        <!-- nested span for escape sequences -->
-        <Span begin="\\" end="." />
-      </RuleSet>
+        <Import ruleSet="CommentMarkerSet"/>
+      </RuleSet> 
     </Span>
 
-    <Keywords fontWeight="bold" foreground="Blue">
-      <Word>let</Word>
-      <Word>match</Word>
-      <Word>with</Word>
-      <Word>if</Word>
-      <Word>else</Word>
-      <Word>elif</Word>
-      <Word>then</Word>
+    <Span color="Comment" multiline="true" begin="\(\*" end="\*\)">
+      <RuleSet>
+        <Import ruleSet="CommentMarkerSet"/>
+      </RuleSet>      
+    </Span>
+
+    <Span color="Preprocessor" begin = "#" />
+    
+    <Span color="String" multiline="true">
+      <Begin>"""</Begin>
+      <End>"""</End>
+    </Span>
+
+    <Span color="String" multiline="false">
+			<Begin>"</Begin>
+			<End>"</End>
+			<RuleSet>
+				<!-- nested span for escape sequences -->
+				<Span begin="\\" end="." />
+			</RuleSet>
+		</Span>
+    
+    <!-- F# Keywords -->
+    <Keywords color="Keywords">
+        <Word>abstract</Word>
+        <Word>and</Word>
+        <Word>as</Word>
+        <Word>assert</Word>
+        <Word>base</Word>
+        <Word>begin</Word>
+        <Word>class</Word>
+        <Word>default</Word>
+        <Word>delegate</Word>
+        <Word>do</Word>
+        <Word>done</Word>
+        <Word>downcast</Word>
+        <Word>downto</Word>
+        <Word>elif</Word>
+        <Word>else</Word>
+        <Word>end</Word>
+        <Word>exception</Word>
+        <Word>extern</Word>
+        <Word>false</Word>
+        <Word>finally</Word>
+        <Word>for</Word>
+        <Word>fun</Word>
+        <Word>function</Word>
+        <Word>global</Word>
+        <Word>if</Word>
+        <Word>in</Word>
+        <Word>inherit</Word>
+        <Word>inline</Word>
+        <Word>interface</Word>
+        <Word>internal</Word>
+        <Word>lazy</Word>
+        <Word>let</Word>
+        <Word>let!</Word>
+        <Word>match</Word>
+        <Word>member</Word>
+        <Word>module</Word>
+        <Word>mutable</Word>
+        <Word>namespace</Word>
+        <Word>new</Word>
+        <Word>not</Word>
+        <Word>null</Word>
+        <Word>of</Word>
+        <Word>open</Word>
+        <Word>or</Word>
+        <Word>override</Word>
+        <Word>private</Word>
+        <Word>public</Word>
+        <Word>rec</Word>
+        <Word>return</Word>
+        <Word>return!</Word>
+        <Word>select</Word>
+        <Word>static</Word>
+        <Word>struct</Word>
+        <Word>then</Word>
+        <Word>to</Word>
+        <Word>true</Word>
+        <Word>try</Word>
+        <Word>type</Word>
+        <Word>upcast</Word>
+        <Word>use</Word>
+        <Word>use!</Word>
+        <Word>val</Word>
+        <Word>void</Word>
+        <Word>when</Word>
+        <Word>while</Word>
+        <Word>with</Word>
+        <Word>yield</Word>
+        <Word>yield!</Word> 
     </Keywords>
 
+    <!-- Reserved for a future use -->
+    <Keywords color="Reserved">
+      <Word>atomic</Word>
+      <Word>break</Word>
+      <Word>checked</Word>
+      <Word>component</Word>
+      <Word>const</Word>
+      <Word>constraint</Word>
+      <Word>constructor</Word>
+      <Word>continue</Word>
+      <Word>eager</Word>
+      <Word>event</Word>
+      <Word>external</Word>
+      <Word>fixed</Word>
+      <Word>functor</Word>
+      <Word>include</Word>
+      <Word>method</Word>
+      <Word>mixin</Word>
+      <Word>object</Word>
+      <Word>parallel</Word>
+      <Word>process</Word>
+      <Word>protected</Word>
+      <Word>pure</Word>
+      <Word>sealed</Word>
+      <Word>tailcall</Word>
+      <Word>trait</Word>
+      <Word>virtual</Word>
+      <Word>volatile</Word> 
+    </Keywords>
+
+    <!-- Reserved keywords from the OCaml language -->
+    <Keywords color="OCamlKeywords">
+      <Word>asr</Word>
+      <Word>land</Word>
+      <Word>lor</Word>
+      <Word>lsl</Word>
+      <Word>lsr</Word>
+      <Word>lxor</Word>
+      <Word>mod</Word>
+      <Word>sig</Word>  
+    </Keywords>
+  
+    <!-- Operators -->
+    <Keywords color="Operators">
+      <Word>-&gt;</Word>
+      <Word>&lt;-</Word>
+      <Word>..</Word>
+      <Word>::</Word>
+      <Word>:=</Word>
+      <Word>:></Word>
+      <Word>:?></Word>
+      <Word>:?</Word>      
+      <Word>&lt;|||</Word>
+      <Word>&lt;||</Word>
+      <Word>&lt;|</Word>      
+      <Word>|||&gt;</Word>
+      <Word>||&gt;</Word>
+      <Word>|&gt;</Word>      
+      <Word>&lt;@@</Word>
+      <Word>@@&gt;</Word>
+      <Word>&lt;@</Word>
+      <Word>@&gt;</Word>
+    </Keywords>
+    
+    
     <!-- Digits -->
-    <Rule foreground="DarkBlue">
-      \b0[xX][0-9a-fA-F]+  # hex number
-      |    \b
-      (    \d+(\.[0-9]+)?   #number with optional floating point
-      |    \.[0-9]+         #or just starting with floating point
-      )
-      ([eE][+-]?[0-9]+)? # optional exponent
-    </Rule>
+		<Rule color="NumberLiteral">
+			\b0[xX][0-9a-fA-F]+  # hex number
+		  | 	
+			(	\b\d+(\.[0-9]+)?   #number with optional floating point
+			|	\.[0-9]+           #or just starting with floating point
+			)
+			([eE][+-]?[0-9]+)? # optional exponent
+		</Rule>
+    
+		<Rule color="Punctuation">
+			[?,.;()\[\]{}+\-/%*&lt;&gt;^+~!|&amp;]+
+		</Rule>  
   </RuleSet>
 </SyntaxDefinition>
