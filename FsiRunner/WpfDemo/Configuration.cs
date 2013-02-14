@@ -1,10 +1,4 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="Configuration.cs" company="">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
-namespace WpfDemo
+﻿namespace WpfDemo
 {
     using System;
     using System.Collections.Generic;
@@ -12,14 +6,11 @@ namespace WpfDemo
     using System.Text;
     using FsiControl;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class Configuration : IConfiguration
     {
         public Configuration()
         {
-            this.FsiLocation = @"C:\Program Files (x86)\Microsoft F#\v4.0\fsi.exe";
+            this.FsiLocation = @"C:\Program Files (x86)\Microsoft SDKs\F#\3.0\Framework\v4.0\fsi.exe";
         }
 
         public string FsiLocation { get; set; }
